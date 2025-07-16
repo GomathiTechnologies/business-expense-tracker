@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary-color: #1c5c7e;
+      --gradient: linear-gradient(to bottom, #1ebba3, #00a1cb);
+      --text-color: #333;
+      --radius: 1.2rem;
+      --shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #008080;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .top-wave {
+      height: 10rem;
+      background: var(--gradient);
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+    }
+
+    .form-area {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+
+    .btn-select {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-select:hover {
+      background-color: #154c6c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-wave"></div>
+    <div class="form-area">
+      <h2>Select Business</h2>
+      <form onsubmit="handleBusinessSelect(event)">
+        <label for="businessSelect">Your Businesses</label>
+        <select id="businessSelect" required>
+          <option value="">-- Select a business --</option>
+          <option value="Acme Inc.">Acme Inc.</option>
+          <option value="Creative Studio">Creative Studio</option>
+          <option value="Freelance Consulting">Freelance Consulting</option>
+        </select>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="makeDefault" />
+          <label for="makeDefault">Make this my default business</label>
+        </div>
+
+        <button type="submit" class="btn-select">Continue</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function handleBusinessSelect(e) {
+      e.preventDefault();
+      const selectedBusiness = document.getElementById('businessSelect').value;
+      const makeDefault = document.getElementById('makeDefault').checked;
+
+      if (!selectedBusiness) {
+        alert("Please select a business.");
+        return;
+      }
+
+      if (makeDefault) {
+        localStorage.setItem("defaultBusiness", selectedBusiness);
+      }
+
+      alert("Selected: " + selectedBusiness + (makeDefault ? " (set as default)" : ""));
+      // You can also redirect or post to backend here
+    }
+
+    // Auto-select default business if saved
+    window.onload = function () {
+      const defaultBiz = localStorage.getItem("defaultBusiness");
+      if (defaultBiz) {
+        document.getElementById("businessSelect").value = defaultBiz;
+        document.getElementById("makeDefault").checked = true;
+      }
+    };
+  </script>
+
+</body>
+</html>
