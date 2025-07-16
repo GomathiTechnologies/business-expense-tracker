@@ -1,5 +1,5 @@
 # business-expense-tracker
-Vibe Coding to Manage the Business Expense
+Vibe Coding to Manage the Business Expense \n
 Personal Business Expense Tracker
 <img width="814" height="1236" alt="image" src="https://github.com/user-attachments/assets/008fcca0-2e42-44ad-adcd-a50cf89d84b2" />
 Enter OTP
