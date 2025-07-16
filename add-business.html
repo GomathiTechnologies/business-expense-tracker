@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Business - Expense Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary-color: #1c5c7e;
+      --gradient: linear-gradient(to bottom, #1ebba3, #00a1cb);
+      --text-color: #333;
+      --radius: 1.2rem;
+      --shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #008080;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .top-wave {
+      height: 10rem;
+      background: var(--gradient);
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+    }
+
+    .form-area {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.4rem;
+      border: 1px solid #ccc;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .btn-submit {
+      margin-top: 2rem;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      background-color: #154c6c;
+    }
+
+    @media (max-width: 500px) {
+      .form-area {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-wave"></div>
+    <div class="form-area">
+      <h2>Add Business</h2>
+      <form>
+        <label for="businessName">Business Name</label>
+        <input type="text" id="businessName" name="businessName" required />
+
+        <label for="businessType">Business Type</label>
+        <select id="businessType" name="businessType" required>
+          <option value="">Select</option>
+          <option value="sole">Sole Proprietorship</option>
+          <option value="partnership">Partnership</option>
+          <option value="corporation">Corporation</option>
+          <option value="nonprofit">Non-Profit</option>
+        </select>
+
+        <label for="contactPerson">Contact Person</label>
+        <input type="text" id="contactPerson" name="contactPerson" required />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" />
+
+        <label for="address">Business Address</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+
+        <button type="submit" class="btn-submit">Save Business</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

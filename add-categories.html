@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Categories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary-color: #1c5c7e;
+      --gradient: linear-gradient(to bottom, #1ebba3, #00a1cb);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #008080;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    .top-wave {
+      height: 10rem;
+      background: var(--gradient);
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+    }
+
+    .form-area {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .suggested {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .suggested button {
+      background: #f0f0f0;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .suggested button:hover {
+      background-color: #dceeee;
+    }
+
+    .add-custom {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .btn-add {
+      background-color: #1ebba3;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 0.8rem;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .chip {
+      background: #e6f9f9;
+      border-radius: 2rem;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .chip button {
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .btn-submit {
+      margin-top: 1.5rem;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-submit:hover {
+      background-color: #154c6c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-wave"></div>
+    <div class="form-area">
+      <h2>Add Categories</h2>
+
+      <div class="suggested">
+        <button onclick="addCategory('Travel')">Travel</button>
+        <button onclick="addCategory('Meals')">Meals</button>
+        <button onclick="addCategory('Office Supplies')">Office Supplies</button>
+        <button onclick="addCategory('Marketing')">Marketing</button>
+        <button onclick="addCategory('Utilities')">Utilities</button>
+      </div>
+
+      <div class="add-custom">
+        <input type="text" id="customCategory" placeholder="Add custom category..." />
+        <button class="btn-add" onclick="addCustom()">Add</button>
+      </div>
+
+      <div class="chips" id="chipContainer"></div>
+
+      <button class="btn-submit" onclick="submitCategories()">Submit Categories</button>
+    </div>
+  </div>
+
+  <script>
+    const chipContainer = document.getElementById('chipContainer');
+    const categorySet = new Set();
+
+    function renderChips() {
+      chipContainer.innerHTML = '';
+      categorySet.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'chip';
+        chip.innerHTML = `${cat} <button onclick="removeCategory('${cat}')">&times;</button>`;
+        chipContainer.appendChild(chip);
+      });
+    }
+
+    function addCategory(cat) {
+      if (!categorySet.has(cat)) {
+        categorySet.add(cat);
+        renderChips();
+      }
+    }
+
+    function addCustom() {
+      const input = document.getElementById('customCategory');
+      const val = input.value.trim();
+      if (val && !categorySet.has(val)) {
+        categorySet.add(val);
+        input.value = '';
+        renderChips();
+      }
+    }
+
+    function removeCategory(cat) {
+      categorySet.delete(cat);
+      renderChips();
+    }
+
+    function submitCategories() {
+      alert("Submitted Categories:\n" + Array.from(categorySet).join(', '));
+      // Replace this with fetch/axios to send to backend
+    }
+  </script>
+
+</body>
+</html>
