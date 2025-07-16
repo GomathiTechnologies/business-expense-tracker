@@ -12,6 +12,8 @@ Add Business
 
 ADD categories
 <img width="1361" height="1315" alt="image" src="https://github.com/user-attachments/assets/ce81365c-f584-438a-a1b0-8d4e1d4bdf96" />
+Select business
+<img width="1215" height="1192" alt="image" src="https://github.com/user-attachments/assets/fccb91ac-1c3b-42e8-9537-1ea66b3cf59a" />
 
 
 React + node js + S3 + dynamodb
