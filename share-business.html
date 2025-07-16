@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Share Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --primary-color: #1c5c7e;
+      --gradient: linear-gradient(to bottom, #1ebba3, #00a1cb);
+      --text-color: #333;
+      --radius: 1.2rem;
+      --shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #008080;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .top-wave {
+      height: 10rem;
+      background: var(--gradient);
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+    }
+
+    .form-area {
+      padding: 2rem;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    select, input[type="email"] {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 0.8rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-share {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-share:hover {
+      background-color: #154c6c;
+    }
+
+    .success-msg {
+      text-align: center;
+      color: green;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="top-wave"></div>
+    <div class="form-area">
+      <h2>Share Business</h2>
+      <form onsubmit="shareBusiness(event)">
+        <label for="businessSelect">Select a Business</label>
+        <select id="businessSelect" required>
+          <option value="">-- Choose Business --</option>
+          <option value="Acme Inc.">Acme Inc.</option>
+          <option value="Creative Studio">Creative Studio</option>
+          <option value="Freelance Consulting">Freelance Consulting</option>
+        </select>
+
+        <label for="email">Share With (Email)</label>
+        <input type="email" id="email" name="email" placeholder="user@example.com" required />
+
+        <button type="submit" class="btn-share">Send Invite</button>
+      </form>
+
+      <div class="success-msg" id="messageBox"></div>
+    </div>
+  </div>
+
+  <script>
+    function shareBusiness(event) {
+      event.preventDefault();
+
+      const business = document.getElementById('businessSelect').value;
+      const email = document.getElementById('email').value;
+      const msgBox = document.getElementById('messageBox');
+
+      if (!business || !email) {
+        msgBox.textContent = "Please select a business and provide an email.";
+        msgBox.style.color = 'red';
+        return;
+      }
+
+      // Simulate API call
+      setTimeout(() => {
+        msgBox.style.color = 'green';
+        msgBox.textContent = `Shared "${business}" with ${email}`;
+        document.getElementById('email').value = '';
+      }, 500);
+
+      // Replace with real fetch call to backend
+      // fetch('/api/share', { method: 'POST', body: JSON.stringify({ business, email }) })
+    }
+  </script>
+
+</body>
+</html>
