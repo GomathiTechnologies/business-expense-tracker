@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Expense Upload</title>
+  <style>
+    :root {
+      --primary-color: #1c5c7e;
+      --background-top: linear-gradient(to bottom, #1ebba3, #00a1cb);
+      --font-color: #555;
+      --link-color: #0077cc;
+      --input-border: #ddd;
+      --shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
+      --radius: 1.2rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #008080;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 24rem;
+      background-color: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .top-wave {
+      background: var(--background-top);
+      height: 10rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      border-bottom-left-radius: 50% 20%;
+      border-bottom-right-radius: 50% 20%;
+      padding-bottom: 1rem;
+    }
+
+    .avatar {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      border: 0.3rem solid white;
+      background-color: white;
+    }
+
+    .form-container {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--font-color);
+    }
+
+    select, input[type="number"], input[type="file"], input[type="date"], input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      border: 0.07rem solid var(--input-border);
+      border-radius: 0.8rem;
+      font-size: 1rem;
+      margin-top: 0.4rem;
+    }
+
+    .submit-btn {
+      background-color: var(--primary-color);
+      color: white;
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1rem;
+      margin-top: 2rem;
+      cursor: pointer;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-wave">
+      <img src="https://via.placeholder.com/100" alt="Business Avatar" class="avatar" />
+    </div>
+    <div class="form-container">
+      <h2>Upload Business Expense</h2>
+      <form>
+        <label for="category">Expense Category</label>
+        <select id="category" name="category" required>
+          <option value="" disabled selected>Select a category</option>
+          <option value="travel">Travel</option>
+          <option value="meals">Meals</option>
+          <option value="office">Office Supplies</option>
+          <option value="marketing">Marketing</option>
+          <option value="utilities">Utilities</option>
+        </select>
+
+        <label for="amount">Amount (CAD)</label>
+        <input type="number" id="amount" name="amount" step="0.01" required />
+        
+        <label for="comments">Comments </label>
+        <input type="text" id="comments" name="Comments" required />
+
+        <label for="date">Expense Date</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="receipt">Upload Receipt</label>
+        <input type="file" id="receipt" name="receipt" accept="image/*,application/pdf" required />
+        <button type="submit" class="submit-btn">Submit Expense</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Set default date to today
+    const dateInput = document.getElementById("date");
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+  </script>
+</body>
+</html>
