@@ -10,6 +10,8 @@ import software.amazon.awssdk.services.ses.model.Destination;
 import software.amazon.awssdk.services.ses.model.Message;
 import software.amazon.awssdk.services.ses.model.Body;
 import software.amazon.awssdk.services.ses.model.Content;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 
 import java.time.Instant;
@@ -24,7 +26,21 @@ public class TriggerOtpLambda implements RequestHandler<Map<String, Object>, Map
 
     @Override
     public Map<String, Object> handleRequest(Map<String, Object> input, Context context) {
-        String email = (String) input.get("email");
+
+        String bodyJson = (String) input.get("body");
+        if (bodyJson == null || bodyJson.isEmpty()) {
+            return Map.of("statusCode", 400, "message", "Missing request body");
+        }
+
+        Map<String, Object> body;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            body = mapper.readValue(bodyJson, Map.class);
+        } catch (Exception e) {
+            return Map.of("statusCode", 400, "message", "Invalid JSON: " + e.getMessage());
+        }
+
+        String email = (String) body.get("email");
         if (email == null || email.isEmpty()) {
             return Map.of("statusCode", 400, "message", "Missing email");
         }
@@ -71,7 +87,7 @@ public class TriggerOtpLambda implements RequestHandler<Map<String, Object>, Map
                                     .text(Content.builder().data("Your OTP is " + otp).build())
                                     .build())
                             .build())
-                    .source("no-reply@yourdomain.com")  // Must be verified in SES
+                    .source("mail4bharane@gmail.com")  // Must be verified in SES
                     .build();
 
             ses.sendEmail(request);
@@ -79,7 +95,9 @@ public class TriggerOtpLambda implements RequestHandler<Map<String, Object>, Map
 
             return Map.of("statusCode", 200, "message", "OTP generated and stored successfully");
         } catch (Exception e) {
+            e.printStackTrace();
             return Map.of("statusCode", 500, "message", "Error: " + e.getMessage());
+
         }
     }
 }

@@ -38,3 +38,10 @@ output "api_gateway_url" {
   description = "Public URL to trigger the Lambda"
   value       = "${aws_apigatewayv2_api.lambda_http_api.api_endpoint}/trigger-otp"
 }
+
+MFTJPJ1M
+
+Your WiFi Code: MFTJPJ1M
+EMD number: 057-4227681745
+
+B7UCM2
